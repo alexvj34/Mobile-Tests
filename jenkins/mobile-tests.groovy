@@ -19,6 +19,10 @@ branch: ${REFSPEC}
             checkout scm;
         }
 
+        stage('Build Docker Image') {
+            docker.build("localhost:5005/mobile_tests:2.0.0")
+        }
+
         stage("Create configuration") {
             sh "echo DEVICE_NAME=${env.getProperty('DEVICE_NAME')} > ./.env"
             sh "echo PLATFORM_NAME=${env.getProperty('PLATFORM_NAME')} >> ./.env"
